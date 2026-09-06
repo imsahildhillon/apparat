@@ -1,0 +1,38 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%
+    String currentPath = request.getServletPath();
+    com.apparat.model.dto.SessionUser navUser = (com.apparat.model.dto.SessionUser)
+            session.getAttribute("sessionUser");
+%>
+<nav class="sidebar">
+    <div class="brand">Apparat</div>
+    <div class="brand-sub">Shared Laboratory Resource Platform</div>
+
+    <a class="nav-link <c:if test='<%= "/dashboard".equals(currentPath) %>'>active</c:if>"
+       href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
+    <a class="nav-link <c:if test='<%= "/resources".equals(currentPath) %>'>active</c:if>"
+       href="${pageContext.request.contextPath}/resources">Resources</a>
+    <a class="nav-link <c:if test='<%= "/bookings/mine".equals(currentPath) %>'>active</c:if>"
+       href="${pageContext.request.contextPath}/bookings/mine">My Bookings</a>
+
+    <% if (navUser != null && navUser.isApprover()) { %>
+    <a class="nav-link <c:if test='<%= "/approvals".equals(currentPath) %>'>active</c:if>"
+       href="${pageContext.request.contextPath}/approvals">Approvals</a>
+    <a class="nav-link <c:if test='<%= "/reports".equals(currentPath) %>'>active</c:if>"
+       href="${pageContext.request.contextPath}/reports">Reports</a>
+    <% } %>
+
+    <a class="nav-link <c:if test='<%= "/profile".equals(currentPath) %>'>active</c:if>"
+       href="${pageContext.request.contextPath}/profile">Profile</a>
+
+    <div class="nav-footer">
+        <% if (navUser != null) { %>
+        <div style="margin-bottom:6px;"><strong><%= navUser.getFullName() %></strong></div>
+        <span class="role-badge"><%= navUser.getRole() %></span>
+        <div style="margin-top:10px;">
+            <a href="${pageContext.request.contextPath}/logout">Log out</a>
+        </div>
+        <% } %>
+    </div>
+</nav>
+<main class="main">

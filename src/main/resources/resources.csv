@@ -1,0 +1,5 @@
+code,name,category,location,description,status,open_time,close_time,slot_minutes,min_slot_minutes,max_slot_minutes,buffer_minutes,requires_certification,requires_approval
+SEM-01,Scanning Electron Microscope,Microscopy,"Materials Bldg, Rm 204",High-resolution SEM for surface imaging up to 100000x,AVAILABLE,09:00,18:00,30,30,180,15,1,1
+AFM-01,Atomic Force Microscope,Microscopy,"Materials Bldg, Rm 206",Contact and tapping-mode AFM for nanoscale topography,AVAILABLE,09:00,18:00,30,30,180,10,1,1
+HPLC-01,High Performance Liquid Chromatograph,Analytical Chem,"Chemistry Bldg, Rm 112",Reverse-phase HPLC with UV-Vis detector,AVAILABLE,08:00,20:00,30,30,240,20,0,0
+XRD-01,X-Ray Diffractometer,Materials Char.,"Materials Bldg, Rm 118",Powder XRD for crystal structure identification,MAINTENANCE,09:00,17:00,30,30,180,15,1,0

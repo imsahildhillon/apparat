@@ -1,0 +1,27 @@
+# Apparat configuration.
+# Copy this file to app.properties (same directory) and fill in real local
+# values. app.properties is gitignored — never commit real credentials.
+# Loaded once at startup by config.AppConfig via getResourceAsStream — see
+# that class for the "why file-based config" rationale.
+
+db.url=jdbc:mysql://localhost:3306/apparat?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+db.user=root
+db.password=
+
+# Atomic booking-slot size, in minutes. Kept configurable rather than
+# hard-coded so grace/slot behaviour can be tuned for a live demo without a
+# rebuild — see PROJECT_BLUEPRINT_CORRECTED.md section 19.4.
+booking.default.slot.minutes=30
+
+# No-show / reminder tuning (minutes). Small values are useful for a live
+# in-class demonstration of the background scheduler.
+booking.reminder.lead.minutes=60
+
+# Thread pool sizes for the background worker layer (job package).
+job.worker.pool.size=4
+job.scheduler.pool.size=2
+job.poll.interval.seconds=5
+
+# Where Apparat writes its own files (audit log, checkpoint, generated reports).
+# Created automatically on startup if missing.
+data.dir=./data
