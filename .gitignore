@@ -8,3 +8,6 @@ src/main/resources/app.properties
 .DS_Store
 .idea/
 *.iml
+
+# Local MySQL runtime data
+.mysql-data/
