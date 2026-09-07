@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><c:if test="${not empty pageTitle}">${pageTitle} · </c:if>Apparat</title>
+    <title><c:if test="${not empty pageTitle}">${pageTitle} - </c:if>Apparat</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
 </head>
 <body>

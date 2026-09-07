@@ -6,7 +6,7 @@
 <div class="page-header">
     <div>
         <h1>Book ${resource.name}</h1>
-        <p>${resource.code} &middot; slots are ${resource.slotMinutes} minutes &middot; ${resource.minSlotMinutes}–${resource.maxSlotMinutes} min per booking</p>
+        <p>${resource.code} &middot; slots are ${resource.slotMinutes} minutes &middot; ${resource.minSlotMinutes}-${resource.maxSlotMinutes} min per booking</p>
     </div>
 </div>
 
@@ -34,8 +34,8 @@
                 <textarea id="purpose" name="purpose" rows="3" placeholder="What will you use this resource for?"></textarea>
             </div>
             <div class="field-hint" style="margin-bottom:var(--space-3);">
-                Times must align to this resource's ${resource.slotMinutes}-minute slots (e.g. 09:00, 09:30 — not 09:15).
-                Misaligned times are rejected, not rounded — see docs/PROJECT_BLUEPRINT_CORRECTED.md §19.4.
+                Times must align to this resource's ${resource.slotMinutes}-minute slots (e.g. 09:00, 09:30 - not 09:15).
+                Misaligned times are rejected, not rounded - see docs/PROJECT_BLUEPRINT_CORRECTED.md section 19.4.
             </div>
             <button type="submit" class="btn btn-primary">Request booking</button>
             <a class="btn btn-secondary" href="${pageContext.request.contextPath}/resources/view?id=${resource.id}">Cancel</a>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="card">
-        <div class="card-title">Availability — ${selectedDate}</div>
+        <div class="card-title">Availability - ${selectedDate}</div>
         <p class="field-hint">Click a free slot to fill the start time.</p>
         <div class="slot-grid" style="grid-template-columns:repeat(auto-fill,minmax(70px,1fr));">
             <c:forEach var="entry" items="${grid}">
@@ -64,7 +64,7 @@
 </div>
 
 <script>
-    // Pure UI convenience — the server re-validates alignment, overlap, quota and
+    // Pure UI convenience - the server re-validates alignment, overlap, quota and
     // maintenance regardless of what this script fills in (see BookingCreateServlet
     // -> BookingService#createBooking). Client-side JS is never the source of truth.
     var minDurationMinutes = ${resource.minSlotMinutes};

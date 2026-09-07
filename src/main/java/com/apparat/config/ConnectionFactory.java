@@ -14,6 +14,20 @@ import java.sql.SQLException;
  */
 public final class ConnectionFactory {
 
+    static {
+        // Explicit registration rather than relying solely on JDBC 4 ServiceLoader
+        // auto-discovery: under a servlet container, DriverManager's own bootstrap
+        // classloader does not always see a driver jar shipped in WEB-INF/lib in
+        // time for the first connection request from a background thread this
+        // application starts itself (job.SchedulerManager) — forcing the class to
+        // load here removes that ordering dependency entirely.
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException("MySQL JDBC driver not found on the classpath.", e);
+        }
+    }
+
     private ConnectionFactory() { }
 
     public static Connection get() throws SQLException {

@@ -94,6 +94,39 @@ public class AppLifecycleListener implements ServletContextListener {
         if (schedulerManager != null) {
             schedulerManager.shutdown();
         }
+        deregisterJdbcDriversAndCleanupThreads();
+    }
+
+    /**
+     * Two known sources of the exact "threads must not outlive the web
+     * application" leak this project is explicit about avoiding
+     * (PROJECT_BLUEPRINT_CORRECTED.md §18.2), verified against a real
+     * redeploy in this environment: (1) the MySQL Connector/J driver
+     * registers itself in the shared, container-wide java.sql.DriverManager,
+     * which otherwise keeps a reference into THIS webapp's classloader after
+     * undeploy; (2) the driver also starts its own background
+     * AbandonedConnectionCleanupThread, independent of anything
+     * job.SchedulerManager owns, which must be stopped explicitly or it
+     * keeps running against a dead classloader and Tomcat logs an
+     * "Illegal access" warning on every subsequent tick.
+     */
+    private void deregisterJdbcDriversAndCleanupThreads() {
+        try {
+            com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.checkedShutdown();
+        } catch (Throwable t) {
+            System.err.println("AppLifecycleListener: could not stop AbandonedConnectionCleanupThread (non-fatal): " + t.getMessage());
+        }
+        java.util.Enumeration<java.sql.Driver> drivers = java.sql.DriverManager.getDrivers();
+        while (drivers.hasMoreElements()) {
+            java.sql.Driver driver = drivers.nextElement();
+            if (driver.getClass().getClassLoader() == this.getClass().getClassLoader()) {
+                try {
+                    java.sql.DriverManager.deregisterDriver(driver);
+                } catch (java.sql.SQLException e) {
+                    System.err.println("AppLifecycleListener: could not deregister driver " + driver + ": " + e.getMessage());
+                }
+            }
+        }
     }
 
     private void ensureDataDirs(Path dataDir) {

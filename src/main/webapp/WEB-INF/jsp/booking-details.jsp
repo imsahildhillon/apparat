@@ -22,7 +22,7 @@
         </div>
         <div><strong>Start</strong><br>${booking.startAt}</div>
         <div><strong>End</strong><br>${booking.endAt}</div>
-        <div><strong>Purpose</strong><br>${not empty booking.purpose ? booking.purpose : '—'}</div>
+        <div><strong>Purpose</strong><br>${not empty booking.purpose ? booking.purpose : '-'}</div>
         <c:if test="${not empty booking.cancelReason}"><div><strong>Reason</strong><br>${booking.cancelReason}</div></c:if>
     </div>
 

@@ -19,12 +19,12 @@
         <div class="card-title">Description</div>
         <p>${resource.description}</p>
         <div class="grid grid-2">
-            <div><strong>Operating hours</strong><br>${resource.openTime} – ${resource.closeTime}</div>
+            <div><strong>Operating hours</strong><br>${resource.openTime} - ${resource.closeTime}</div>
             <div><strong>Slot size</strong><br>${resource.slotMinutes} minutes</div>
-            <div><strong>Duration range</strong><br>${resource.minSlotMinutes}–${resource.maxSlotMinutes} minutes</div>
+            <div><strong>Duration range</strong><br>${resource.minSlotMinutes}-${resource.maxSlotMinutes} minutes</div>
             <div><strong>Cooldown / buffer</strong><br>${resource.bufferMinutes} minutes</div>
         </div>
-        <c:if test="${resource.requiresCertification}"><p style="margin-top:var(--space-3);"><span class="badge badge-warning">Requires certification</span> (displayed for information — not enforced in this MVP; see docs/CORRECTIONS_LOG.md scope notes)</p></c:if>
+        <c:if test="${resource.requiresCertification}"><p style="margin-top:var(--space-3);"><span class="badge badge-warning">Requires certification</span> (displayed for information - not enforced in this MVP; see docs/CORRECTIONS_LOG.md scope notes)</p></c:if>
         <c:if test="${resource.requiresApproval}"><p><span class="badge badge-muted">Bookings need Technician/Admin approval</span></p></c:if>
     </div>
     <div class="card">
@@ -62,7 +62,7 @@
 </div>
 
 <div class="card">
-    <div class="card-title">Availability — ${selectedDate}</div>
+    <div class="card-title">Availability - ${selectedDate}</div>
     <form method="get" action="${pageContext.request.contextPath}/resources/view" style="margin-bottom:var(--space-4);">
         <input type="hidden" name="id" value="${resource.id}">
         <input type="date" name="date" value="${selectedDate}" onchange="this.form.submit()">
@@ -79,7 +79,7 @@
             </div>
         </c:forEach>
     </div>
-    <p class="field-hint" style="margin-top:var(--space-3);">Green = free · Grey = booked · Red = maintenance. Use "Book this resource" above to select an exact time — the booking form re-validates every slot server-side.</p>
+    <p class="field-hint" style="margin-top:var(--space-3);">Green = free - Grey = booked - Red = maintenance. Use "Book this resource" above to select an exact time - the booking form re-validates every slot server-side.</p>
 </div>
 
 <%@ include file="layout/footer.jspf" %>

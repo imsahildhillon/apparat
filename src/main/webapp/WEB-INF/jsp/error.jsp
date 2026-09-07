@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Something went wrong · Apparat</title>
+    <title>Something went wrong - Apparat</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
     <style>body{display:flex;align-items:center;justify-content:center;min-height:100vh;}</style>
 </head>

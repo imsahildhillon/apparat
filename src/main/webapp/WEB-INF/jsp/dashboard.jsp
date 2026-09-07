@@ -70,7 +70,7 @@
             <c:otherwise>
                 <c:forEach var="r" items="${resourcesUnderMaintenance}">
                     <div style="padding:8px 0;border-bottom:1px solid var(--color-border);">
-                        <a href="${pageContext.request.contextPath}/resources/view?id=${r.id}"><strong>${r.code}</strong> — ${r.name}</a>
+                        <a href="${pageContext.request.contextPath}/resources/view?id=${r.id}"><strong>${r.code}</strong> - ${r.name}</a>
                     </div>
                 </c:forEach>
             </c:otherwise>
@@ -85,7 +85,7 @@
             <c:otherwise>
                 <c:forEach var="b" items="${todaysBookings}">
                     <div style="padding:8px 0;border-bottom:1px solid var(--color-border);">
-                        Booking #${b.id} — ${b.startAt} to ${b.endAt}
+                        Booking #${b.id} - ${b.startAt} to ${b.endAt}
                     </div>
                 </c:forEach>
             </c:otherwise>

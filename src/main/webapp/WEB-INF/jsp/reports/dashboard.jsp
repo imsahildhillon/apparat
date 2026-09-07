@@ -7,7 +7,7 @@
     <h1>Resource Utilization</h1>
     <a class="btn btn-secondary" href="${pageContext.request.contextPath}/reports?format=csv">Download CSV</a>
 </div>
-<p>Last 30 days (${fromDate} to ${toDate}). Computed from actual booking_slot occupancy — see service.ReportService.</p>
+<p>Last 30 days (${fromDate} to ${toDate}). Computed from actual booking_slot occupancy - see service.ReportService.</p>
 
 <div class="card">
     <c:choose>
@@ -21,7 +21,7 @@
                 <tbody>
                 <c:forEach var="entry" items="${utilization}">
                     <tr>
-                        <td>${entry.key.code} — ${entry.key.name}</td>
+                        <td>${entry.key.code} - ${entry.key.name}</td>
                         <td>${entry.key.category}</td>
                         <td>
                             <div class="utilization-bar-track">

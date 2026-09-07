@@ -69,7 +69,8 @@ pool.shutdown();
 
 **Purpose:** this is the test referenced throughout the corrected blueprint (§18.5, §26 demo script, §31 README) as the proof of the three-layer defence. It is deliberately run against the real database so that even if the application-level `ReentrantLock` were disabled or buggy, assertions 4–6 would still catch a correctness failure — the test is validating the *outcome*, not the mechanism, which is the correct thing to validate.
 
-**Result:** `NOT YET RUN — fill in after executing against a real build. Do not pre-fill a specific pass/fail count.`
+**Result: RUN — 2026-09-06, against MySQL 5.7.24 (InnoDB) on this development machine, via `mvn test -Dapparat.it=true -Dtest=ConcurrentBookingTest`.**
+Implemented as `src/test/java/com/apparat/concurrency/ConcurrentBookingTest#fiftyConcurrentIdenticalRequestsProduceExactlyOneWinner`, run against an isolated `TEST-CONCURRENCY` resource and 55 dedicated test users (not the demo seed data) so the run is repeatable and side-effect-free. **Measured: 50 threads submitted, exactly 1 success, exactly 49 `SlotConflictException`, 0 unexpected exceptions.** Database verification after the run: exactly 1 active booking on the resource for that slot; exactly 2 `booking_slot` rows (14:00 and 14:30, for the 60-minute booking at 30-minute granularity); both rows owned by the same single `booking_id`; 0 orphaned `booking_slot` rows anywhere in the table. Reproduced on a second independent run (0.66s elapsed) with an identical outcome. Test data was deleted after each run; the demo seed data (8 users, 4 resources, 3 bookings) was verified unaffected.
 
 ---
 

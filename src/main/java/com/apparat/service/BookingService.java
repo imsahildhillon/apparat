@@ -152,10 +152,22 @@ public class BookingService {
         }
     }
 
+    /**
+     * Quota is charged against the ISO week of the booking's START date, not
+     * the date the request happens to be created on — see
+     * PROJECT_BLUEPRINT_CORRECTED.md §21: "quota is consumed against the ISO
+     * week of the booking's start." This must be the SAME rule
+     * #cancelBooking's release uses (booking.getStartAt().toLocalDate()), or
+     * a booking created in one ISO week for a slot in a later week would be
+     * charged to the wrong week's row and could never be correctly released
+     * on cancellation — a real bug caught by manual end-to-end testing
+     * (create on a Sunday for a Tuesday slot straddles an ISO week boundary)
+     * before this fix.
+     */
     private void consumeQuota(Connection con, SessionUser actor, User actorUser, BookingRequest req) throws SQLException {
-        LocalDate today = LocalDate.now();
-        int isoYear = QuotaDao.isoYear(today);
-        int isoWeek = QuotaDao.isoWeek(today);
+        LocalDate bookingWeek = req.getStartAt().toLocalDate();
+        int isoYear = QuotaDao.isoYear(bookingWeek);
+        int isoWeek = QuotaDao.isoWeek(bookingWeek);
         int limit = actorUser.weeklyQuotaMinutes();
         quotaDao.ensureRowExists(con, actor.getUserId(), isoYear, isoWeek, limit);
         boolean consumed = quotaDao.tryConsume(con, actor.getUserId(), isoYear, isoWeek, (int) req.durationMinutes());

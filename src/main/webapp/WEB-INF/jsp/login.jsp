@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign in · Apparat</title>
+    <title>Sign in - Apparat</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
     <style>
         body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
@@ -39,8 +39,8 @@
         </form>
 
         <p style="margin-top:var(--space-5);font-size:12px;">
-            Demo accounts (local/dev database only — see README "Demo credentials"):<br>
-            student.arjun@apparat.edu · prof.kapoor@apparat.edu · tech.mehta@apparat.edu · admin@apparat.edu<br>
+            Demo accounts (local/dev database only - see README "Demo credentials"):<br>
+            student.arjun@apparat.edu - prof.kapoor@apparat.edu - tech.mehta@apparat.edu - admin@apparat.edu<br>
             Password for every seeded account: <code>Demo@123</code>
         </p>
     </div>

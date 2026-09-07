@@ -69,7 +69,7 @@ VALUES
  (SELECT id FROM users WHERE email='student.meera@apparat.edu'),
  TIMESTAMP(DATE_ADD(CURDATE(), INTERVAL 2 DAY), '14:00:00'),
  TIMESTAMP(DATE_ADD(CURDATE(), INTERVAL 2 DAY), '15:00:00'),
- 'PENDING', 'Surface imaging of alloy samples — needs supervisor approval',
+ 'PENDING', 'Surface imaging of alloy samples - needs supervisor approval',
  NULL, NULL);
 
 -- Materialize booking_slot rows for the two seeded occupying bookings (mirrors what

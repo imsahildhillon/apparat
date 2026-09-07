@@ -1,10 +1,10 @@
 target/
-*.class
+.mysql-data/
+.tomcat/
+data/
 src/main/resources/app.properties
-.env
-*.ser
+*.class
+*.log
+.DS_Store
 .idea/
 *.iml
-.vscode/
-.DS_Store
-*.log
